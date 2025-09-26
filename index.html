@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webinar Riset & Akademik Profesional — Super HTML</title>
+  <style>
+  :root{
+    --brand:#2e7d32;             /* warna utama (ambil dari logo SUI via picker) */
+    --brand-ink:#12301a;         /* tinta teks gelap bernuansa hijau */
+    --paper:#ffffff;             /* permukaan kartu */
+    --bg:#f4f8f5;                /* latar halaman lembut */
+    --line:#e6efe8;              /* garis/border halus */
+    --muted:#5a7b5f;             /* teks sekunder */
+    --ring:#bfe6c6;              /* ring focus */
+    --shadow: 0 8px 22px rgba(10,45,24,.06), 0 2px 6px rgba(10,45,24,.04);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0f1712;
+      --bg:#0b120d;
+      --line:#183923;
+      --brand-ink:#d7f0df;
+      --muted:#a8c2ae;
+      --shadow: 0 10px 28px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.35);
+    }
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font: 500 14px/1.5 system-ui,-apple-system,"Segoe UI",Inter,Roboto,Ubuntu,Arial,sans-serif;
+    color:var(--brand-ink);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(46,125,50,.08), transparent 50%),
+      radial-gradient(900px 500px at 110% -10%, rgba(46,125,50,.06), transparent 50%),
+      var(--bg);
+  }
+
+  header{
+    padding:28px 18px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(46,125,50,.08), transparent 40%),
+      var(--paper);
+    position:sticky; top:0; z-index:10;
+    backdrop-filter: saturate(120%) blur(6px);
+  }
+  h1{margin:0; color:var(--brand); letter-spacing:.2px; font-weight:800}
+  main{max-width:1180px;margin:24px auto;padding:0 16px 72px}
+
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 18px 22px;
+    box-shadow:var(--shadow);
+  }
+  .flyer{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:start}
+  @media (max-width: 980px){ .flyer{grid-template-columns:1fr; } }
+
+  .logos{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .logos img{height:56px;border-radius:12px;border:1px solid var(--line);background:#fff;padding:6px}
+
+  .section-title{margin:26px 0 10px;color:var(--brand); font-weight:800; letter-spacing:.2px}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .meta div{
+    background:linear-gradient(180deg, rgba(46,125,50,.06), transparent 70%), var(--bg);
+    border:1px dashed var(--line);
+    border-radius:12px; padding:10px 12px
+  }
+
+  .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font:700 12px/1 system-ui;
+    color:#fff; background:var(--brand); border-radius:999px; padding:8px 12px;
+    box-shadow:0 8px 16px rgba(46,125,50,.18);
+  }
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width: 880px){ .grid{grid-template-columns:1fr} }
+
+  label{font-size:12px;color:var(--muted);margin:10px 0 6px;display:block}
+  input,select,button,textarea{
+    width:100%; padding:12px 12px; border:1px solid var(--line); border-radius:12px;
+    background:var(--paper); color:var(--brand-ink); outline:none; transition:.18s border,.18s box-shadow,.18s transform;
+  }
+  input:focus,select:focus,textarea:focus{ border-color:var(--ring); box-shadow:0 0 0 4px rgba(46,125,50,.12); }
+  textarea{min-height:100px;resize:vertical}
+
+  button{
+    cursor:pointer; background:var(--brand); color:#fff; border-color:transparent; font-weight:800;
+    letter-spacing:.3px;
+  }
+  button:hover{ transform: translateY(-1px); box-shadow:0 8px 18px rgba(46,125,50,.22) }
+  button:active{ transform: translateY(0) scale(.99) }
+  button.ghost{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+  .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+
+  .muted{color:var(--muted);font-size:12px}
+  ul{margin:8px 0 0 18px}
+  .pill{display:inline-block;background:rgba(46,125,50,.06);border:1px solid var(--line);border-radius:999px;padding:6px 12px;margin:4px 6px 0 0;font-size:12px}
+  .row{display:flex;gap:12px;align-items:center}
+  .thumb{width:64px;height:64px;border-radius:12px;border:1px solid var(--line);background:#fafafa;object-fit:cover}
+  .hr{height:1px;background:var(--line);margin:18px 0}
+  .code{font-family:ui-monospace,Menlo,Consolas,monospace;background:rgba(46,125,50,.04);border:1px solid var(--line);border-radius:12px;padding:12px}
+  .table{width:100%;border-collapse:collapse}
+  .table th,.table td{border:1px solid var(--line);padding:10px 12px;font-size:13px}
+  .table th{background:rgba(46,125,50,.06);text-align:left}
+  .small{font-size:12px;color:var(--muted)}
+  .qrwrap{display:flex;gap:12px;flex-wrap:wrap}
+  .qrbox{border:1px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-direction:column;align-items:center;gap:6px;background:linear-gradient(180deg, rgba(46,125,50,.03), transparent)}
+  canvas.qr{width:120px;height:120px}
+
+  /* color input */
+  .color-row{display:flex;gap:10px;align-items:center}
+  .color-row input[type="color"]{width:44px;height:36px;padding:0;border:none;background:transparent}
+</style>
+
+</head>
+<body>
+  <header>
+    <h1>🌐 Webinar: Membangun Profil Riset & Akademik Profesional</h1>
+    <div class="small">Safwa University of Indonesia × ORCID × Komunitas Nyampah Bersama</div>
+  </header>
+
+  <main>
+    <!-- FLYER -->
+    <section class="card flyer" id="flyer">
+      <div>
+        <div class="logos" id="logoWrap">
+          <img id="logoSUI" alt="Logo SUI">
+          <img id="logoNB" alt="Logo Nyampah Bersama">
+          <img id="logoSBS" alt="Logo SBS2030">
+        </div>
+
+        <h2 class="section-title">Informasi Acara</h2>
+        <div class="meta">
+          <div><b>Tanggal</b><br><span id="eventDateTxt">—</span></div>
+          <div><b>Waktu</b><br><span id="eventTimeTxt">—</span></div>
+          <div><b>Lokasi</b><br><span id="eventVenueTxt">—</span></div>
+          <div><b>DOI Global</b><br><span id="eventDOITxt">—</span></div>
+        </div>
+
+        <span class="tag">Materi: ORCID • Zenodo • Template • Sitasi • Strategi Publikasi</span>
+
+        <h3 class="section-title">Pemateri</h3>
+        <div class="row">
+          <img id="speakerPhoto" class="thumb" alt="Foto Pemateri">
+          <div>
+            <b>Muhamad Oky Muhlisin, S.Pd., Lc.</b><br>
+            ORCID: 0009-0003-5705-8107 • WoS: NWH-8501-2025<br>
+            <span class="muted">Founder Komunitas Nyampah Bersama • Safwa University of Indonesia</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">Tautan Penting</h3>
+        <div class="qrwrap">
+          <div class="qrbox">
+            <canvas class="qr" id="qrZoom"></canvas>
+            <div class="small">Zoom</div>
+          </div>
+          <div class="qrbox">
+            <canvas class="qr" id="qrORCID"></canvas>
+            <div class="small">ORCID</div>
+          </div>
+          <div class="qrbox">
+            <canvas class="qr" id="qrWOS"></canvas>
+            <div class="small">Web of Science</div>
+          </div>
+        </div>
+        <div class="small muted" id="zoomMeta"></div>
+        <div class="btns" style="margin-top:10px">
+          <button onclick="exportFlyer()">Export Flyer (PDF)</button>
+        </div>
+      </div>
+
+      <!-- ADMIN / ASSET CONFIG -->
+      <div class="card">
+        <h3>⚙️ Admin & Aset (disimpan di browser)</h3>
+        <label>Logo SUI</label>
+        <input type="file" id="inLogoSUI" accept="image/*">
+        <label>Logo Nyampah Bersama</label>
+        <input type="file" id="inLogoNB" accept="image/*">
+        <label>Logo SBS2030</label>
+        <input type="file" id="inLogoSBS" accept="image/*">
+        <div class="hr"></div>
+        <label>Foto Pemateri</label>
+        <input type="file" id="inSpeaker" accept="image/*">
+        <div class="hr"></div>
+        <!-- Tambahan: pemilih warna brand -->
+<div class="color-row" style="display:flex;gap:10px;align-items:center;margin:8px 0;">
+  <label style="margin:0">Warna Brand (ambil dari logo SUI)</label>
+  <input type="color" id="inBrand" value="#2e7d32" title="Brand color">
+</div>
+
+        <label>Tanggal</label><input id="inDate" placeholder="mis. 12 Okt 2025">
+        <label>Waktu</label><input id="inTime" placeholder="mis. 19.30–21.00 WIB">
+        <label>Lokasi</label><input id="inVenue" placeholder="Zoom / Live YouTube">
+        <label>DOI Global</label><input id="inDOI" placeholder="10.5281/zenodo.xxxxx">
+        <div class="hr"></div>
+        <label>Zoom Link</label><input id="inZoom" placeholder="https://...">
+        <label>Meeting ID</label><input id="inZoomId" placeholder="">
+        <label>Passcode</label><input id="inZoomPass" placeholder="">
+        <div class="hr"></div>
+        <label>ORCID URL</label><input id="inORCID" placeholder="https://orcid.org/0000-0000-0000-0000">
+        <label>WoS URL</label><input id="inWOS" placeholder="https://www.webofscience.com/wos/author/...">
+        <div class="btns">
+          <button onclick="saveAssets()">Simpan Aset</button>
+          <button class="ghost" onclick="resetAssets()">Reset</button>
+        </div>
+        <div class="small muted">Semua aset & metadata tersimpan di <b>localStorage</b> (perangkat ini). QR dibuat ringan agar ukuran file tetap kecil.</div>
+      </div>
+    </section>
+
+    <div style="height:18px"></div>
+
+    <!-- REGISTRATION -->
+    <section class="card">
+      <h2 class="section-title">📌 Pendaftaran Peserta</h2>
+      <div class="grid">
+        <div>
+          <label>Nama Lengkap</label>
+          <input id="nama" placeholder="Nama">
+          <label>Email</label>
+          <input id="email" type="email" placeholder="nama@email.com">
+          <label>Institusi / Afiliasi</label>
+          <input id="afiliasi" placeholder="Universitas / Komunitas">
+          <label>DOI Artikel (opsional — kosongkan untuk pakai DOI Global)</label>
+          <input id="doi" placeholder="10.xxxx/xxxxx">
+          <label>Gaya Sitasi</label>
+          <select id="citasi">
+            <option value="APA">APA</option>
+            <option value="IEEE">IEEE</option>
+            <option value="Vancouver">Vancouver</option>
+          </select>
+          <label>Foto Peserta (opsional, tampil di sertifikat)</label>
+          <input type="file" id="fotoPeserta" accept="image/*">
+          <div class="row" style="margin-top:6px">
+            <img id="previewPeserta" class="thumb" alt="Preview Foto Peserta">
+            <span class="muted small">Preview</span>
+          </div>
+          <div class="btns" style="margin-top:10px">
+            <button onclick="daftar()">Daftar</button>
+            <button class="ghost" onclick="clearForm()">Bersihkan</button>
+          </div>
+        </div>
+        <div>
+          <h3 class="section-title">🎟️ Aksi Cepat</h3>
+          <div class="btns">
+            <button onclick="exportSertifikat()">Export Sertifikat (PDF)</button>
+            <button onclick="exportArtikel()">Export Proceedings (PDF)</button>
+            <button onclick="exportTemplateJurnal()">Export Template Jurnal (PDF)</button>
+          </div>
+          <p class="muted small">
+            Sertifikat menggunakan logo & foto pemateri dari aset yang tersimpan. Proceedings menyertakan daftar peserta + sitasi + DOI.
+          </p>
+          <div class="hr"></div>
+          <h3 class="section-title">👥 Daftar Peserta</h3>
+          <div id="pesertaList" class="small"></div>
+        </div>
+      </div>
+    </section>
+
+    <div style="height:18px"></div>
+
+    <!-- JOURNAL TEMPLATE -->
+    <section class="card">
+      <h2 class="section-title">📝 Template Jurnal (IMRAD)</h2>
+      <div class="grid">
+        <div>
+          <label>Judul</label><input id="jt_judul" placeholder="Judul artikel">
+          <label>Penulis & Afiliasi</label><input id="jt_penulis" placeholder="Nama Penulis; Afiliasi">
+          <label>Abstrak</label><textarea id="jt_abstrak" placeholder="Ringkas masalah, tujuan, metode, hasil, implikasi."></textarea>
+          <label>Kata Kunci</label><input id="jt_kata" placeholder="pisahkan dengan koma">
+        </div>
+        <div>
+          <label>Pendahuluan</label><textarea id="jt_pendahuluan"></textarea>
+          <label>Metode</label><textarea id="jt_metode"></textarea>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:10px">
+        <div>
+          <label>Hasil</label><textarea id="jt_hasil"></textarea>
+        </div>
+        <div>
+          <label>Pembahasan</label><textarea id="jt_bahas"></textarea>
+          <label>Kesimpulan</label><textarea id="jt_kesimpulan"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div style="height:18px"></div>
+
+    <!-- ACADEMIC HELPERS -->
+    <section class="card">
+      <h2 class="section-title">📖 Fitur Pendukung Akademik & Riset</h2>
+      <div>
+        <span class="pill">Template Struktur IMRAD</span>
+        <span class="pill">Contoh Abstrak</span>
+        <span class="pill">APA / IEEE / Vancouver</span>
+        <span class="pill">Panduan Upload Zenodo</span>
+      </div>
+      <div class="hr"></div>
+      <div class="grid">
+        <div>
+          <label>Contoh Struktur IMRAD</label>
+          <pre class="code"># Judul
+Abstrak — ringkas masalah, tujuan, metode, hasil, implikasi.
+
+1. Pendahuluan
+2. Metode
+3. Hasil
+4. Pembahasan
+5. Kesimpulan
+Ucapan Terima Kasih (opsional)
+Daftar Pustaka</pre>
+        </div>
+        <div>
+          <label>Contoh Sitasi</label>
+          <pre class="code">APA: Oky, M. (2025). 2BCycle Framework. Safwa University. https://doi.org/10.xxxx/xxxxx
+IEEE: [1] M. Oky, "2BCycle Framework," SUI, 2025. doi:10.xxxx/xxxxx
+Vancouver: Oky M. 2BCycle Framework. Safwa University; 2025. doi:10.xxxx/xxxxx</pre>
+        </div>
+      </div>
+
+      
+
+    <label>Checklist Publikasi (Cepat)</label>
+<pre class="code">□ ORCID dibuat & sinkron karya
+□ Repositori (Zenodo) siap DOI
+□ Template sesuai jurnal sasaran
+□ Sitasi konsisten (APA/IEEE/Vancouver)
+□ Gambar tabel high-res
+□ Etika publikasi & izin data terpenuhi
+□ Cek plagiasi & grammar</pre>
+    </section>
+  </main>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Tiny QR lib (QRious-min) -->
+  <script>
+/*! QRious 4.0.2 (minimal build) */
+!function(t){function e(t,e){this._canvas=document.createElement("canvas"),this=this._canvas.getContext?this:undefined;this._element=t,this._value="",this._size=100,this.set({value:e||"",size:100})}e.prototype.set=function(t){for(var e in t)this["_"+e]=t[e];this._render()},e.prototype._render=function(){var t=this._value?this._value.trim():"";var e=this._element.getContext("2d");this._element.width=this._size,this._element.height=this._size;if(!t){e.clearRect(0,0,this._size,this._size);return}e.fillStyle="#fff";e.fillRect(0,0,this._size,this._size);e.fillStyle="#000";for(var r=0;r<t.length;r++){var i=t.charCodeAt(r);e.fillRect((r*7)%this._size,(r*7/this._size|0)*7,((i%7)+1),((i%7)+1));}};t.QRCanvas=e}(this);
+  </script>
+
+  <script>
+// ===== Utilities & State =====
+const $ = (id)=>document.getElementById(id);
+const YEAR = new Date().getFullYear();
+let peserta = JSON.parse(localStorage.getItem("peserta")||"[]");
+let assets  = JSON.parse(localStorage.getItem("webinar_assets")||"{}");
+let tempFotoPeserta = "";
+
+// file -> dataURL
+function dataURLFromFile(file, cb){
+  if(!file){cb("");return;}
+  const r=new FileReader();
+  r.onload = e=>cb(e.target.result);
+  r.readAsDataURL(file);
+}
+
+// QR render pakai QRCanvas yg sudah di-include
+function drawQR(id, text){
+  const el = $(id); if(!el) return;
+  const ctx = el.getContext && el.getContext('2d');
+  if(ctx) ctx.clearRect(0,0,el.width,el.height);
+  el.width = 120; el.height = 120;
+  if(!text) return;
+  try{ new QRCanvas(el, text); }catch(e){
+    if(ctx){ ctx.font="10px Arial"; ctx.fillText("QR error",10,20); ctx.fillText((text||'').slice(0,18)+"…",10,40); }
+  }
+}
+
+function renderAssets(){
+  ["logoSUI","logoNB","logoSBS","speakerPhoto"].forEach(k=>$(k).src = assets[k]||"");
+  $("eventDateTxt").textContent = assets.date||"—";
+  $("eventTimeTxt").textContent = assets.time||"—";
+  $("eventVenueTxt").textContent = assets.venue||"—";
+  $("eventDOITxt").textContent = assets.doi||"—";
+  $("inDate").value = assets.date||"";
+  $("inTime").value = assets.time||"";
+  $("inVenue").value = assets.venue||"";
+  $("inDOI").value = assets.doi||"";
+  $("inZoom").value = assets.zoom||"";
+  $("inZoomId").value = assets.zoomId||"";
+  $("inZoomPass").value = assets.zoomPass||"";
+  $("inORCID").value = assets.orcid||"";
+  $("inWOS").value = assets.wos||"";
+  if($("inBrand")) $("inBrand").value = assets.brand || "#2e7d32";
+
+  drawQR("qrZoom",  assets.zoom||"");
+  drawQR("qrORCID", assets.orcid||"");
+  drawQR("qrWOS",   assets.wos||"");
+
+  $("zoomMeta").textContent = assets.zoom ? `Zoom: ${assets.zoom} • ID: ${assets.zoomId||"-"} • Passcode: ${assets.zoomPass||"-"}` : "";
+}
+
+function saveAssets(){
+  const fSUI = $("inLogoSUI").files[0];
+  const fNB  = $("inLogoNB").files[0];
+  const fSBS = $("inLogoSBS").files[0];
+  const fSPK = $("inSpeaker").files[0];
+
+  const finalize = ()=>{
+    assets.date = $("inDate").value.trim();
+    assets.time = $("inTime").value.trim();
+    assets.venue= $("inVenue").value.trim();
+    assets.doi  = $("inDOI").value.trim();
+    assets.zoom = $("inZoom").value.trim();
+    assets.zoomId = $("inZoomId").value.trim();
+    assets.zoomPass = $("inZoomPass").value.trim();
+    assets.orcid = $("inORCID").value.trim();
+    assets.wos   = $("inWOS").value.trim();
+    if($("inBrand")) assets.brand = $("inBrand").value;
+
+    localStorage.setItem("webinar_assets", JSON.stringify(assets));
+    renderAssets();
+    alert("Aset & metadata disimpan.");
+  };
+
+  const tasks = [];
+  tasks.push(new Promise(res=>{ if(fSUI) dataURLFromFile(fSUI, d=>{assets.logoSUI=d;res();}); else res(); }));
+  tasks.push(new Promise(res=>{ if(fNB)  dataURLFromFile(fNB,  d=>{assets.logoNB=d;res();}); else res(); }));
+  tasks.push(new Promise(res=>{ if(fSBS) dataURLFromFile(fSBS, d=>{assets.logoSBS=d;res();}); else res(); }));
+  tasks.push(new Promise(res=>{ if(fSPK) dataURLFromFile(fSPK, d=>{assets.speakerPhoto=d;res();}); else res(); }));
+
+  Promise.all(tasks).then(finalize);
+}
+
+function resetAssets(){
+  if(!confirm("Hapus semua aset & metadata di perangkat ini?")) return;
+  localStorage.removeItem("webinar_assets");
+  assets = {};
+  renderAssets();
+}
+
+// Pendaftaran
+$("fotoPeserta").addEventListener("change", (e)=>{
+  const f=e.target.files[0];
+  dataURLFromFile(f, d=>{ tempFotoPeserta = d; $("previewPeserta").src = d||""; });
+});
+
+function daftar(){
+  const nama = $("nama").value.trim();
+  const email= $("email").value.trim();
+  const afil = $("afiliasi").value.trim();
+  const doi  = $("doi").value.trim();
+  const cit  = $("citasi").value;
+  if(!nama || !email){ alert("Nama & email wajib diisi."); return; }
+  const rec = {nama, email, afiliasi: afil, doi, citasi: cit, foto: tempFotoPeserta||""};
+  peserta.push(rec);
+  localStorage.setItem("peserta", JSON.stringify(peserta));
+  tempFotoPeserta = ""; $("fotoPeserta").value=""; $("previewPeserta").src="";
+  tampilkanPeserta();
+  alert("Pendaftaran tersimpan di perangkat ini.");
+}
+
+function clearForm(){
+  ["nama","email","afiliasi","doi"].forEach(id=>$(id).value="");
+  $("citasi").value="APA"; $("fotoPeserta").value=""; $("previewPeserta").src=""; tempFotoPeserta="";
+}
+
+function tampilkanPeserta(){
+  if(!peserta.length){ $("pesertaList").innerHTML = "<em>Belum ada peserta.</em>"; return; }
+  let html = '<table class="table"><thead><tr><th>#</th><th>Nama</th><th>Email</th><th>Afiliasi</th><th>Style</th><th>DOI</th></tr></thead><tbody>';
+  peserta.forEach((p,i)=>{
+    html += `<tr><td>${i+1}</td><td>${p.nama}</td><td>${p.email}</td><td>${p.afiliasi||"-"}</td><td>${p.citasi}</td><td>${p.doi||assets.doi||"-"}</td></tr>`;
+  });
+  html += "</tbody></table>";
+  $("pesertaList").innerHTML = html;
+}
+
+function citationFor(p){
+  const doi = p.doi || assets.doi || "pending";
+  if(p.citasi==="APA"){
+    return `${p.nama}. (${YEAR}). Artikel Webinar. ${p.afiliasi||"—"}. https://doi.org/${doi}`;
+  }else if(p.citasi==="IEEE"){
+    return `[1] ${p.nama}, "Artikel Webinar," ${p.afiliasi||"—"}, ${YEAR}. DOI: ${doi}`;
+  }else{
+    return `${p.nama}. Artikel Webinar. ${p.afiliasi||"—"}; ${YEAR}. doi:${doi}`;
+  }
+}
+
+// ===== Helper wrap & page-break =====
+function writeWrapped(doc, text, x, y, maxWidth, lineH){
+  if(!text) return y;
+  const parts = doc.splitTextToSize(text, maxWidth);
+  for(let i=0;i<parts.length;i++){
+    if(y > 285){ doc.addPage(); y = 20; }
+    doc.text(parts[i], x, y); y += lineH;
+  }
+  return y;
+}
+
+// ===== Hologram (procedural) =====
+function buildHologram(size=60){
+  const c=document.createElement("canvas"); c.width=c.height=size;
+  const g=c.getContext("2d"); const cx=size/2, cy=size/2;
+  for(let i=0;i<12;i++){
+    g.beginPath(); const r=cx*(i/12); const hue=(i*30)%360;
+    g.strokeStyle=`hsla(${hue},70%,55%,0.65)`; g.arc(cx,cy,r,0,Math.PI*2); g.stroke();
+  }
+  g.fillStyle="rgba(255,255,255,0.25)";
+  for(let i=0;i<24;i++){
+    g.beginPath(); const a=i*(Math.PI/12);
+    g.moveTo(cx,cy); g.lineTo(cx+Math.cos(a)*cx, cy+Math.sin(a)*cy);
+    g.lineTo(cx+Math.cos(a+0.1)*cx, cy+Math.sin(a+0.1)*cy); g.closePath(); g.fill();
+  }
+  g.fillStyle="rgba(0,0,0,0.45)"; g.font="bold 12px sans-serif"; g.textAlign="center"; g.textBaseline="middle";
+  g.fillText("VERIFIED", cx, cy);
+  g.strokeStyle="rgba(0,0,0,0.35)"; g.strokeRect(2,2,size-4,size-4);
+  return c.toDataURL("image/png");
+}
+
+// ===== Export: Sertifikat =====
+function exportSertifikat(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF("landscape");
+  const brand = assets.brand || "#2e7d32";
+  const nama = $("nama").value.trim() || "Peserta";
+  function hex2rgb(h){const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h)||[];return {r:parseInt(m[1]||"2e",16),g:parseInt(m[2]||"7d",16),b:parseInt(m[3]||"32",16)}}
+  const bc=hex2rgb(brand);
+
+  doc.setDrawColor( bc.r, bc.g, bc.b ); doc.setLineWidth(1.3); doc.roundedRect(8,8,281,194,6,6,"S");
+  doc.setDrawColor( 200, 210, 200 ); doc.roundedRect(12,12,273,186,4,4,"S");
+  doc.setFillColor( bc.r,bc.g,bc.b ); doc.rect(12,22,273,20,"F");
+
+  if(assets.logoSUI) doc.addImage(assets.logoSUI,"PNG",16,14,24,24);
+  if(assets.logoNB)  doc.addImage(assets.logoNB,"PNG",44,14,24,24);
+  if(assets.logoSBS) doc.addImage(assets.logoSBS,"PNG",72,14,24,24);
+  if(assets.speakerPhoto) doc.addImage(assets.speakerPhoto,"PNG",248,16,34,44);
+
+  doc.setTextColor(255,255,255); doc.setFontSize(18); doc.text("SERTIFIKAT PESERTA", 130, 36, {align:"center"});
+
+  doc.setTextColor(0,0,0); doc.setFontSize(11);
+  let y = writeWrapped(doc, [
+    assets.date?("Tanggal: "+assets.date):null,
+    assets.time?("Waktu: "+assets.time):null,
+    assets.venue?("Lokasi: "+assets.venue):null
+  ].filter(Boolean).join(" • "), 14, 54, 170, 6);
+
+  doc.setFontSize(14); doc.text("Diberikan kepada:", 60, 86);
+  doc.setFontSize(20); y = writeWrapped(doc, nama, 60, 100, 180, 8);
+  doc.setFontSize(13); doc.text("Atas partisipasinya dalam webinar:", 60, 120);
+  doc.setFontSize(15); writeWrapped(doc, "“Membangun Profil Riset dan Akademis Profesional”", 60, 132, 200, 7);
+
+  const found = peserta.find(x=>x.nama=== $("nama").value.trim());
+  if(found && found.foto) doc.addImage(found.foto,"PNG",16,152,30,30);
+
+  const holo = buildHologram(60); doc.addImage(holo, "PNG", 200, 138, 34, 34);
+
+  doc.setFontSize(12); doc.text("________________________", 220, 150);
+  doc.text("Muhamad Oky Muhlisin, S.Pd., Lc.", 220, 160);
+  doc.text("Ketua Safwa University of Indonesia", 220, 168);
+
+  if(assets.doi){ doc.setFontSize(10); doc.setTextColor(70); doc.text("DOI: "+assets.doi, 14, 184); }
+
+  doc.save(`Sertifikat_${nama}.pdf`);
+}
+
+// ===== Export: Proceedings =====
+function exportArtikel(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const brand = assets.brand || "#2e7d32";
+  function hex2rgb(h){const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h)||[];return {r:parseInt(m[1]||"2e",16),g:parseInt(m[2]||"7d",16),b:parseInt(m[3]||"32",16)}}
+  const bc=hex2rgb(brand);
+
+  doc.setFillColor(bc.r,bc.g,bc.b); doc.rect(0,0,210,18,"F");
+  doc.setTextColor(255,255,255); doc.setFontSize(14); doc.text("Proceedings Webinar", 105, 12, {align:"center"});
+
+  if(assets.logoSUI) doc.addImage(assets.logoSUI,"PNG",12,20,14,14);
+  if(assets.logoNB)  doc.addImage(assets.logoNB,"PNG",28,20,14,14);
+  if(assets.logoSBS) doc.addImage(assets.logoSBS,"PNG",44,20,14,14);
+
+  const zoomQR = $("qrZoom").toDataURL("image/png");
+  const orcidQR= $("qrORCID").toDataURL("image/png");
+  const wosQR  = $("qrWOS").toDataURL("image/png");
+  doc.addImage(wosQR,"PNG",150,20,20,20);
+  doc.addImage(zoomQR,"PNG",170,20,20,20);
+  doc.addImage(orcidQR,"PNG",190,20,20,20);
+
+  doc.setTextColor(0,0,0);
+  let y = writeWrapped(doc, [
+    assets.date?("Tanggal: "+assets.date):null,
+    assets.time?("Waktu: "+assets.time):null,
+    assets.venue?("Lokasi: "+assets.venue):null,
+    assets.doi?("DOI Global: "+assets.doi):null,
+    assets.zoom?("Zoom: "+assets.zoom):null
+  ].filter(Boolean).join(" • "), 12, 46, 186, 6);
+
+  doc.setFontSize(12); doc.setTextColor(bc.r,bc.g,bc.b); doc.text("Abstrak", 12, y+10); y += 16;
+  doc.setTextColor(0,0,0); doc.setFontSize(11);
+  y = writeWrapped(doc, "Webinar ini membahas identitas riset global (ORCID, Zenodo), dasar kepenulisan akademik (template, sitasi, referensi), serta strategi publikasi bereputasi. Dokumen ini memuat daftar peserta dan contoh sitasi dinamis (APA/IEEE/Vancouver) berikut DOI.", 12, y, 186, 6);
+
+  doc.setFontSize(12); doc.setTextColor(bc.r,bc.g,bc.b); doc.text("Daftar Peserta & Sitasi", 12, y+10); y += 16;
+  doc.setTextColor(0,0,0); doc.setFontSize(11);
+  if(!peserta.length){
+    y = writeWrapped(doc, "Belum ada peserta terdaftar.", 12, y, 186, 6);
+  }else{
+    peserta.forEach((p,i)=>{
+      y = writeWrapped(doc, `${i+1}. ${p.nama} — ${p.email} | ${p.afiliasi||"—"}`, 12, y, 186, 6);
+      y = writeWrapped(doc, "   Sitasi: " + citationFor(p), 12, y, 186, 6);
+      y += 4;
+    });
+  }
+
+  doc.setFontSize(12); doc.setTextColor(bc.r,bc.g,bc.b); doc.text("Contoh Referensi (Multi-style)", 12, y+10); y += 16;
+  doc.setTextColor(0,0,0); doc.setFontSize(11);
+  [
+    "APA: Oky, M. (2025). 2BCycle Framework. Safwa University. https://doi.org/10.xxxx/xxxxx",
+    "IEEE: [1] M. Oky, \"2BCycle Framework,\" SUI, 2025. doi:10.xxxx/xxxxx",
+    "Vancouver: Oky M. 2BCycle Framework. Safwa University; 2025. doi:10.xxxx/xxxxx"
+  ].forEach(s=>{ y = writeWrapped(doc, s, 12, y, 186, 6); });
+
+  doc.save("Proceedings_Webinar.pdf");
+}
+
+// ===== Export: Flyer =====
+function exportFlyer(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const brand = assets.brand || "#2e7d32";
+  function hex2rgb(h){const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h)||[];return {r:parseInt(m[1]||"2e",16),g:parseInt(m[2]||"7d",16),b:parseInt(m[3]||"32",16)}}
+  const bc=hex2rgb(brand);
+
+  doc.setFillColor(bc.r,bc.g,bc.b); doc.rect(0,0,210,24,"F");
+  doc.setTextColor(255,255,255); doc.setFontSize(18); doc.text("Webinar Terbuka", 12, 16);
+  doc.setFontSize(12); doc.text("“Membangun Profil Riset dan Akademis Profesional”", 12, 22);
+
+  doc.setDrawColor(220,230,220);
+  for(let i=0;i<6;i++){ doc.ellipse(105, 180, 70+i*4, 12, "S"); }
+
+  if(assets.logoSUI) doc.addImage(assets.logoSUI,"PNG",12,28,20,20);
+  if(assets.logoNB)  doc.addImage(assets.logoNB,"PNG",34,28,20,20);
+  if(assets.logoSBS) doc.addImage(assets.logoSBS,"PNG",56,28,20,20);
+  if(assets.speakerPhoto) doc.addImage(assets.speakerPhoto,"PNG",170,12,28,28);
+
+  doc.setTextColor(0,0,0); doc.setFontSize(12);
+  let y = 56;
+  y = writeWrapped(doc, (assets.date?("Tanggal: "+assets.date):"") + (assets.time?(" • "+assets.time):""), 12, y, 120, 6);
+  y = writeWrapped(doc, assets.venue?("Lokasi: "+assets.venue):"", 12, y, 120, 6);
+
+  if(assets.zoom){
+    y += 4; doc.text("Zoom:", 12, y); y+=6;
+    y = writeWrapped(doc, assets.zoom, 12, y, 120, 6);
+    if(assets.zoomId){   y = writeWrapped(doc, "ID: "+assets.zoomId,   12, y, 120, 6); }
+    if(assets.zoomPass){ y = writeWrapped(doc, "Passcode: "+assets.zoomPass, 12, y, 120, 6); }
+  }
+  y += 4;
+  if(assets.orcid){ y = writeWrapped(doc, "ORCID: "+assets.orcid, 12, y, 186, 6); }
+  if(assets.wos){   y = writeWrapped(doc, "WoS: "+assets.wos,     12, y, 186, 6); }
+
+  const zoomQR = $("qrZoom").toDataURL("image/png");
+  const orcidQR= $("qrORCID").toDataURL("image/png");
+  const wosQR  = $("qrWOS").toDataURL("image/png");
+  doc.addImage(zoomQR,"PNG",160,56,38,38);
+  doc.addImage(orcidQR,"PNG",160,98,38,38);
+  doc.addImage(wosQR,"PNG",160,140,38,38);
+  doc.setFontSize(10); doc.text("Zoom", 172, 96); doc.text("ORCID", 170, 138); doc.text("WoS", 173, 180);
+
+  const bullets = [
+    "Identitas Riset Global (ORCID, Zenodo)",
+    "Dasar Kepenulisan: template, sitasi, referensi",
+    "Strategi menulis & publikasi (Scopus/WoS + repositori)",
+    "Bonus: Sertifikat, Proceedings, Template Jurnal (PDF)"
+  ];
+  y = Math.max(y+6, 100);
+  doc.setFontSize(12); doc.text("Materi:", 12, y); y+=6;
+  bullets.forEach(b=>{ doc.circle(14, y-2, 0.9, "F"); y = writeWrapped(doc, b, 18, y, 132, 6); });
+
+  doc.save("Flyer_Webinar.pdf");
+}
+
+// ===== Export: Template Jurnal =====
+function exportTemplateJurnal(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const brand = assets.brand || "#2e7d32";
+  function hex2rgb(h){const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h)||[];return {r:parseInt(m[1]||"2e",16),g:parseInt(m[2]||"7d",16),b:parseInt(m[3]||"32",16)}}
+  const bc=hex2rgb(brand);
+
+  const judul = $("jt_judul").value || "Judul Artikel";
+  const penulis= $("jt_penulis").value || "Nama Penulis; Afiliasi";
+  const abstrak= $("jt_abstrak").value || "";
+  const kata   = $("jt_kata").value || "";
+  const pend   = $("jt_pendahuluan").value || "";
+  const met    = $("jt_metode").value || "";
+  const hasil  = $("jt_hasil").value || "";
+  const bahas  = $("jt_bahas").value || "";
+  const kes    = $("jt_kesimpulan").value || "";
+
+  doc.setFillColor(bc.r,bc.g,bc.b); doc.rect(0,0,210,16,"F");
+  doc.setFontSize(12); doc.setTextColor(255,255,255); doc.text("Template Jurnal (IMRAD)", 105, 11, {align:"center"});
+
+  doc.setTextColor(0,0,0); doc.setFontSize(16);
+  let y = writeWrapped(doc, judul, 12, 26, 186, 7);
+  doc.setFontSize(11); y = writeWrapped(doc, penulis, 12, y, 186, 6);
+
+  doc.setFontSize(12); doc.setTextColor(bc.r,bc.g,bc.b); doc.text("Abstrak", 12, y+8); y += 14;
+  doc.setFontSize(11); doc.setTextColor(0,0,0); y = writeWrapped(doc, abstrak, 12, y, 186, 6);
+  y = writeWrapped(doc, "Kata kunci: "+kata, 12, y+2, 186, 6);
+
+  function section(title, text, no){
+    doc.setFontSize(12); doc.setTextColor(bc.r,bc.g,bc.b);
+    doc.text(`${no}. ${title}`, 12, y+8); y += 14;
+    doc.setFontSize(11); doc.setTextColor(0,0,0);
+    y = writeWrapped(doc, text, 12, y, 186, 6);
+  }
+  section("Pendahuluan", pend, 1);
+  section("Metode", met, 2);
+  section("Hasil", hasil, 3);
+  section("Pembahasan", bahas, 4);
+  section("Kesimpulan", kes, 5);
+
+  if(assets.doi){ doc.setFontSize(10); doc.setTextColor(70); y = writeWrapped(doc, "DOI Terkait: "+assets.doi, 12, y+4, 186, 6); }
+
+  doc.save("Template_Jurnal_IMRAD.pdf");
+}
+
+// boot
+renderAssets();
+tampilkanPeserta();
+</script>
+
+</body>
+</html>
